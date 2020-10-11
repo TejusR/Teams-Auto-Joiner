@@ -339,14 +339,15 @@ def get_calendar_meetings():
 def decide_meeting():
     newest_meetings = []
 
-    meetings = [x for x in meetings if not x.calendar_blacklisted]
-    if len(meetings) == 0:
+    temp_meetings = [x for x in meetings if not x.calendar_blacklisted]
+    # meetings = temp_meetings
+    if len(temp_meetings) == 0:
         return
     
-    meetings.sort(key=lambda x: x.time_started, reverse=True)
-    newest_time = meetings[0].time_started
+    temp_meetings.sort(key=lambda x: x.time_started, reverse=True)
+    newest_time = temp_meetings[0].time_started
 
-    for meeting in meetings:
+    for meeting in temp_meetings:
         if meeting.time_started >= newest_time:
             newest_meetings.append(meeting)
         else:
